@@ -1,25 +1,27 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import UserList from './components/UserList';
+import UserForm from './components/UserForm';
+import EditUserForm from './components/EditUserForm';
+import AxiosDemo from './components/AxiosDemo';
+import type { User } from './types/user';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [editingUser, setEditingUser] = useState<User | null>(null);
 
   return (
     <div className="App">
-      <h1>React + TypeScript</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <h1>Управление пользователями</h1>
+
+      <div className="container">
+        <UserForm />
+        <UserList onEdit={setEditingUser} />
+        <AxiosDemo />
       </div>
-      <p className="read-the-docs">
-        Click on the React logo to learn more
-      </p>
+
+      <EditUserForm user={editingUser} onClose={() => setEditingUser(null)} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
