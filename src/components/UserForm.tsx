@@ -15,7 +15,7 @@ export default function UserForm() {
       setName('');
       setEmail('');
       alert('Пользователь успешно добавлен!');
-    } catch (error) {
+    } catch {
       alert('Ошибка при добавлении пользователя');
     }
   };

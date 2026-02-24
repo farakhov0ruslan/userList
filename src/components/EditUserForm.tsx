@@ -29,7 +29,7 @@ export default function EditUserForm({ user, onClose }: EditUserFormProps) {
       await updateUser({ id: user.id, name, email }).unwrap();
       alert('Пользователь успешно обновлен!');
       onClose();
-    } catch (error) {
+    } catch {
       alert('Ошибка при обновлении пользователя');
     }
   };

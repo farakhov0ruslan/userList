@@ -4,7 +4,7 @@ import type { User, CreateUserDto, UpdateUserDto } from '../types/user';
 export const usersApi = createApi({
   reducerPath: 'usersApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://jsonplaceholder.typicode.com'
+    baseUrl: 'https://jsonplaceholder.typicode.com',
   }),
   tagTypes: ['Users'],
   endpoints: (builder) => ({
@@ -26,16 +26,18 @@ export const usersApi = createApi({
               draft.unshift(createdUser);
             })
           );
-        } catch {}
+        } catch {
+          /* optimistic update failed */
+        }
       },
     }),
     updateUser: builder.mutation<User, UpdateUserDto>({
-      query: ({ id, ...userData }) => ({
+      query: ({ id, ..._userData }) => ({
         url: `/users/${id}`,
         method: 'PUT',
-        body: userData,
+        body: _userData,
       }),
-      async onQueryStarted({ id, ...userData }, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ id, ..._userData }, { dispatch, queryFulfilled }) {
         try {
           const { data: updatedUser } = await queryFulfilled;
           dispatch(
@@ -46,14 +48,12 @@ export const usersApi = createApi({
               }
             })
           );
-        } catch {}
+        } catch {
+          /* optimistic update failed */
+        }
       },
     }),
   }),
 });
 
-export const {
-  useGetUsersQuery,
-  useCreateUserMutation,
-  useUpdateUserMutation
-} = usersApi;
+export const { useGetUsersQuery, useCreateUserMutation, useUpdateUserMutation } = usersApi;

@@ -268,16 +268,16 @@ h2 {
   transition: background 0.2s;
 }
 
-.form-actions button[type="submit"] {
+.form-actions button[type='submit'] {
   background: #4a90e2;
   color: white;
 }
 
-.form-actions button[type="submit"]:hover:not(:disabled) {
+.form-actions button[type='submit']:hover:not(:disabled) {
   background: #357abd;
 }
 
-.form-actions button[type="submit"]:disabled {
+.form-actions button[type='submit']:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
@@ -307,7 +307,8 @@ h2 {
 }
 
 @media (prefers-color-scheme: dark) {
-  h1, h2 {
+  h1,
+  h2 {
     color: #f0f0f0;
   }
 
